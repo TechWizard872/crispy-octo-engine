@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkillGo | Learn. Level Up. Go Further.</title>
+  <meta name="description" content="SkillGo is a gamified learning platform for Computer Skills, AI, Coding, Electronics, Science, Logic, Finance, and Automotive. Download the official APK directly.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Dynamic QR Code CDN Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    :root {
+      --primary: #4F46E5;
+      --primary-dark: #3730A3;
+      --primary-light: #EEF2FF;
+      --streak: #F97316;
+      --gem: #06B6D4;
+      --success: #10B981;
+      --bg: #0F172A;
+      --card-bg: #1E293B;
+      --text: #F8FAFC;
+      --text-muted: #94A3B8;
+      --border: #334155;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 840px;
+      margin: 0 auto;
+      padding: 24px 20px 60px 20px;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 0 20px 0;
+    }
+
+    .logo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      padding: 6px 16px;
+      border-radius: 9999px;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 3.5rem);
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      background: linear-gradient(135deg, #FFFFFF 30%, #818CF8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+    }
+
+    .tagline {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #A5B4FC;
+      margin-bottom: 16px;
+    }
+
+    .description {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto 32px auto;
+    }
+
+    .download-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 32px 24px;
+      text-align: center;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+      margin-bottom: 40px;
+    }
+
+    .download-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 620px) {
+      .download-actions {
+        flex-direction: row;
+        max-width: 580px;
+      }
+    }
+
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #4F46E5, #6366F1);
+      color: #FFFFFF;
+      font-size: 1.1rem;
+      font-weight: 800;
+      padding: 16px 28px;
+      border-radius: 16px;
+      text-decoration: none;
+      box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.4), 0 4px 6px -4px rgba(79, 70, 229, 0.4);
+      transition: all 0.2s ease;
+      width: 100%;
+      flex: 1.25;
+    }
+
+    .btn-download:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 20px -3px rgba(79, 70, 229, 0.5);
+    }
+
+    .btn-share {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, rgba(249, 115, 22, 0.18), rgba(234, 88, 12, 0.28));
+      color: #FED7AA;
+      border: 1px solid rgba(249, 115, 22, 0.5);
+      font-family: inherit;
+      font-size: 1.05rem;
+      font-weight: 800;
+      padding: 16px 24px;
+      border-radius: 16px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(249, 115, 22, 0.15);
+      transition: all 0.2s ease;
+      width: 100%;
+      flex: 1;
+    }
+
+    .btn-share:hover {
+      background: linear-gradient(135deg, rgba(249, 115, 22, 0.3), rgba(234, 88, 12, 0.42));
+      border-color: #F97316;
+      color: #FFFFFF;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(249, 115, 22, 0.35);
+    }
+
+    .btn-share:active {
+      transform: translateY(0);
+    }
+
+    .social-quick-share {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .social-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #E2E8F0;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .social-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.25);
+      color: #FFFFFF;
+      transform: translateY(-1px);
+    }
+
+    .social-wa:hover {
+      border-color: #25D366;
+      color: #86EFAC;
+    }
+
+    .social-tg:hover {
+      border-color: #229ED9;
+      color: #93C5FD;
+    }
+
+    .social-x:hover {
+      border-color: #E2E8F0;
+      color: #FFFFFF;
+    }
+
+    .share-toast {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 8px 18px;
+      background: #10B981;
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 0.85rem;
+      border-radius: 9999px;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: all 0.25s ease;
+      pointer-events: none;
+    }
+
+    .share-toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Dynamic QR Code Component & Download Layout */
+    .download-main-grid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    @media (min-width: 768px) {
+      .download-main-grid {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 32px;
+      }
+    }
+
+    .download-primary-col {
+      flex: 1;
+      width: 100%;
+    }
+
+    .qr-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 18px 20px;
+      box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.3);
+      max-width: 220px;
+      flex-shrink: 0;
+      transition: all 0.25s ease;
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    .qr-card:hover {
+      border-color: rgba(99, 102, 241, 0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 24px -4px rgba(79, 70, 229, 0.25);
+    }
+
+    .qr-wrapper {
+      position: relative;
+      background: #FFFFFF;
+      padding: 8px;
+      border-radius: 14px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 140px;
+      height: 140px;
+    }
+
+    .qr-canvas-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 124px;
+      height: 124px;
+    }
+
+    .qr-canvas-box img,
+    .qr-canvas-box canvas {
+      display: block;
+      width: 124px !important;
+      height: 124px !important;
+      border-radius: 4px;
+    }
+
+    .qr-badge {
+      position: absolute;
+      bottom: -6px;
+      right: -6px;
+      background: #4F46E5;
+      color: #FFFFFF;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      letter-spacing: 0.05em;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .qr-caption {
+      margin-top: 10px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .qr-caption strong {
+      font-size: 0.88rem;
+      color: #F8FAFC;
+    }
+
+    .qr-caption span {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      max-width: 180px;
+      line-height: 1.3;
+    }
+
+    .version-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .version-meta span {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 4px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .feature-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .feature-item h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .feature-item p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .changelog-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 40px;
+    }
+
+    .changelog-list {
+      list-style-type: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .changelog-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.95rem;
+      color: #CBD5E1;
+    }
+
+    .changelog-list li::before {
+      content: "✓";
+      color: var(--success);
+      font-weight: 900;
+      font-size: 1.1rem;
+    }
+
+    .instructions-box {
+      background: rgba(79, 70, 229, 0.07);
+      border: 1.5px solid rgba(99, 102, 241, 0.3);
+      border-radius: 20px;
+      padding: 28px 24px;
+      margin-bottom: 40px;
+    }
+
+    .steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .step-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .step-number {
+      background: var(--primary);
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .step-text h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .step-text p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .notice {
+      background: rgba(249, 115, 22, 0.1);
+      border: 1px solid rgba(249, 115, 22, 0.3);
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 0.85rem;
+      color: #FED7AA;
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    footer {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      color: #A5B4FC;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="logo-badge">Official Web Release</div>
+      <h1>SKILLGO</h1>
+      <p class="tagline">Learn. Level Up. Go Further.</p>
+      <p class="description">Master Technology, AI, Coding, Electronics, Science, Logic, Finance, and Automotive with bite-sized gamified challenges and your personal AI coach.</p>
+    </header>
+
+    <div class="download-card">
+      <div class="download-main-grid">
+        <!-- Left / Primary: Download Action & Social Share -->
+        <div class="download-primary-col">
+          <div class="download-actions">
+            <a href="downloads/skillgo-latest.apk" class="btn-download" id="downloadBtn">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
+              </svg>
+              Download for Android
+            </a>
+
+            <button type="button" class="btn-share" id="shareBtn" aria-label="Share SkillGo with friends">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92c0-1.61-1.31-2.92-2.92-2.92z"/>
+              </svg>
+              <span>Share &amp; Invite</span>
+            </button>
+          </div>
+
+          <!-- Quick Social Media Share Shortcuts -->
+          <div class="social-quick-share">
+            <span class="social-label">Share via:</span>
+            <a href="#" class="social-btn social-wa" id="shareWhatsApp" title="Share on WhatsApp" aria-label="Share on WhatsApp" target="_blank" rel="noopener">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.53c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.74-.66-1.25-1.48-1.39-1.73-.14-.25-.01-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.66.31-.23.25-.88.86-.88 2.09s.9 2.43 1.02 2.6c.13.17 1.77 2.7 4.28 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.18-.47-.31"/></svg>
+              WhatsApp
+            </a>
+            <a href="#" class="social-btn social-tg" id="shareTelegram" title="Share on Telegram" aria-label="Share on Telegram" target="_blank" rel="noopener">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+              Telegram
+            </a>
+            <a href="#" class="social-btn social-x" id="shareX" title="Share on X" aria-label="Share on X" target="_blank" rel="noopener">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              X (Twitter)
+            </a>
+          </div>
+
+          <div id="shareToast" class="share-toast" role="status" aria-live="polite">✓ Link copied to clipboard!</div>
+        </div>
+
+        <!-- Right / Adjacent: Dynamic QR Code Scanner Card -->
+        <div class="qr-card" id="qrCard">
+          <div class="qr-wrapper">
+            <div id="qrcode" class="qr-canvas-box" title="Scan to download SkillGo APK"></div>
+            <div class="qr-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5zm4 4h-2v-2h2v2zm0-4h-2V7h2v5z"/></svg>
+              APK
+            </div>
+          </div>
+          <div class="qr-caption">
+            <strong>Scan to Download</strong>
+            <span>Scan with phone camera to download APK directly</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="version-meta">
+        <span>Current Version: <strong id="currentVersion">1.0.0</strong></span>
+        <span>File: <strong>skillgo-latest.apk (<span id="fileSize">~10 MB</span>)</strong></span>
+        <span>Requires: <strong>Android 7.0+</strong></span>
+        <span>Release: <strong id="releaseDate">October 2026</strong></span>
+      </div>
+    </div>
+
+    <!-- What's New -->
+    <div class="changelog-box">
+      <h2 class="section-title">✨ What's New in Version <span id="versionTitle">1.0.0</span></h2>
+      <ul class="changelog-list" id="changelogList">
+        <li>8 Foundational Courses: Computer Skills, AI & Prompting, Coding, Electronics & Circuits, Science, Logic & Problem Solving, Money Basics, and Automotive Tech.</li>
+        <li>Interactive Learning Engines: Multiple choice, True/False, Matching pairs, Sequence ordering, and Fill-in-the-blank activities.</li>
+        <li>SkillGo Coach 🤖: Built-in AI tutor powered by Gemini for analogies, beginner explanations, and real-time concept hints.</li>
+        <li>Streak & Habit Tracker: Daily streak flame tracker with 7-day calendar and streak shields.</li>
+        <li>Direct In-App Updates: Checks this website automatically for new versions so you never miss an update!</li>
+      </ul>
+    </div>
+
+    <!-- Installation Instructions for Sideloading Outside Google Play -->
+    <div class="instructions-box">
+      <h2 class="section-title">📱 How to Install on Android (Direct Download)</h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem;">Because SkillGo is distributed directly from our website instead of Google Play Store, Android requires a one-time approval to install the APK.</p>
+
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-text">
+            <h4>Download the APK</h4>
+            <p>Tap the <strong>Download for Android</strong> button above. If your browser asks "File might be harmful", tap <strong>Download anyway</strong>.</p>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-text">
+            <h4>Open the Downloaded File</h4>
+            <p>When the download completes, tap the notification or open your device's <strong>Files</strong> or <strong>Downloads</strong> folder and tap <code>skillgo-latest.apk</code>.</p>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-text">
+            <h4>Allow Installation from this Source</h4>
+            <p>If Android prompts <em>"For your security, your phone is not allowed to install unknown apps from this source"</em>, tap <strong>Settings</strong> and toggle <strong>Allow from this source</strong> to ON.</p>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-number">4</div>
+          <div class="step-text">
+            <h4>Install and Start Learning</h4>
+            <p>Return to the installer dialog and tap <strong>Install</strong>. Once finished, tap <strong>Open</strong> to launch SkillGo!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="notice">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink: 0;">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+        </svg>
+        <div>
+          <strong>Legitimate Android Security:</strong> SkillGo respects all Android system security permissions. The app will automatically notify you whenever a newer version is ready on this website!
+        </div>
+      </div>
+    </div>
+
+    <!-- Features Overview -->
+    <h2 class="section-title">🌟 Why Learn with SkillGo?</h2>
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="feature-icon">🎯</div>
+        <h3>Bite-Sized Challenges</h3>
+        <p>Short 5-minute interactive exercises designed for deep retention rather than boring passive reading.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🤖</div>
+        <h3>SkillGo Coach</h3>
+        <p>Ask for hints, simplified analogies, or real-world examples anytime with your integrated AI tutor.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🔥</div>
+        <h3>Streaks & Gamification</h3>
+        <p>Earn XP, level up, unlock achievements, collect gems, and maintain your daily learning streak.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🔄</div>
+        <h3>Automatic Web Updates</h3>
+        <p>Continuous course updates and new features delivered directly to your device without Google Play.</p>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2026 SkillGo. Distributed directly via official website.</p>
+      <p style="margin-top: 6px;">
+        <a href="update-manifest.json">Update Manifest (JSON)</a> &bull; 
+        <a href="content-feed.json">Content Feed (JSON)</a>
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    // Dynamic QR Code Generator using QRCode CDN Library
+    function generateDownloadQrCode(targetUrl) {
+      var qrContainer = document.getElementById('qrcode');
+      if (!qrContainer) return;
+
+      qrContainer.innerHTML = '';
+
+      var resolvedUrl = targetUrl;
+      if (!resolvedUrl) {
+        var dlBtn = document.getElementById('downloadBtn');
+        resolvedUrl = (dlBtn && dlBtn.href) ? dlBtn.href : (window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/') + 'downloads/skillgo-latest.apk');
+      }
+
+      // Check for QRCode CDN library
+      if (typeof QRCode !== 'undefined') {
+        try {
+          new QRCode(qrContainer, {
+            text: resolvedUrl,
+            width: 124,
+            height: 124,
+            colorDark: '#0F172A',
+            colorLight: '#FFFFFF',
+            correctLevel: QRCode.CorrectLevel.M
+          });
+          return;
+        } catch (err) {
+          console.warn('QRCode library initialization error, using fallback:', err);
+        }
+      }
+
+      // High-reliability fallback image if CDN is offline or blocked
+      var fallbackImg = document.createElement('img');
+      fallbackImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=124x124&margin=4&data=' + encodeURIComponent(resolvedUrl);
+      fallbackImg.alt = 'Scan to download SkillGo APK';
+      fallbackImg.width = 124;
+      fallbackImg.height = 124;
+      qrContainer.appendChild(fallbackImg);
+    }
+
+    // Initialize QR Code on page load
+    generateDownloadQrCode();
+
+    // Single source of truth: Automatically sync website with update-manifest.json
+    fetch('./update-manifest.json')
+      .then(function(res) {
+        if (!res.ok) throw new Error('Status: ' + res.status);
+        return res.json();
+      })
+      .then(function(data) {
+        if (data.latestVersion) {
+          var vEl = document.getElementById('currentVersion');
+          var vtEl = document.getElementById('versionTitle');
+          if (vEl) vEl.textContent = data.latestVersion;
+          if (vtEl) vtEl.textContent = data.latestVersion;
+        }
+        if (data.releaseDate) {
+          var rdEl = document.getElementById('releaseDate');
+          if (rdEl) rdEl.textContent = data.releaseDate;
+        }
+        if (data.apkSizeMb) {
+          var fsEl = document.getElementById('fileSize');
+          if (fsEl) fsEl.textContent = '~' + data.apkSizeMb + ' MB';
+        }
+        if (data.downloadUrl && !data.downloadUrl.includes('YOUR_USERNAME')) {
+          var dlBtn = document.getElementById('downloadBtn');
+          if (dlBtn) dlBtn.href = data.downloadUrl;
+          generateDownloadQrCode(data.downloadUrl);
+        }
+        if (Array.isArray(data.releaseNotes) && data.releaseNotes.length > 0) {
+          var list = document.getElementById('changelogList');
+          if (list) {
+            list.innerHTML = '';
+            data.releaseNotes.forEach(function(note) {
+              var li = document.createElement('li');
+              li.textContent = note;
+              list.appendChild(li);
+            });
+          }
+        }
+      })
+      .catch(function(err) {
+        // Fallback to static values if fetched in restricted environment
+        console.log('Using static manifest fallback:', err);
+      });
+
+    // Social Media Share & Android System Share Intent Handler
+    (function setupSharing() {
+      var shareBtn = document.getElementById('shareBtn');
+      var shareToast = document.getElementById('shareToast');
+      var toastTimer = null;
+
+      function showToast(msg) {
+        if (!shareToast) return;
+        shareToast.textContent = msg;
+        shareToast.classList.add('show');
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(function() {
+          shareToast.classList.remove('show');
+        }, 3000);
+      }
+
+      function getSharePayload() {
+        var cleanUrl = window.location.href.split('#')[0];
+        return {
+          title: 'SkillGo | Learn. Level Up. Go Further.',
+          text: 'Level up your skills in Tech, AI, Coding, Electronics, and Science! Join me on SkillGo:',
+          url: cleanUrl
+        };
+      }
+
+      function copyToClipboard(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function() {
+            showToast('✓ Invite link copied! Share with your friends.');
+          }).catch(function() {
+            fallbackCopy(text);
+          });
+        } else {
+          fallbackCopy(text);
+        }
+      }
+
+      function fallbackCopy(text) {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.top = '0';
+        textarea.style.left = '0';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          showToast('✓ Invite link copied! Share with your friends.');
+        } catch (e) {
+          showToast('Share link: ' + window.location.href);
+        }
+        document.body.removeChild(textarea);
+      }
+
+      // Configure direct social links
+      var payload = getSharePayload();
+      var encodedUrl = encodeURIComponent(payload.url);
+      var encodedText = encodeURIComponent(payload.text + ' ' + payload.url);
+
+      var waBtn = document.getElementById('shareWhatsApp');
+      if (waBtn) {
+        waBtn.href = 'https://api.whatsapp.com/send?text=' + encodedText;
+      }
+
+      var tgBtn = document.getElementById('shareTelegram');
+      if (tgBtn) {
+        tgBtn.href = 'https://t.me/share/url?url=' + encodedUrl + '&text=' + encodeURIComponent(payload.text);
+      }
+
+      var xBtn = document.getElementById('shareX');
+      if (xBtn) {
+        xBtn.href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(payload.text) + '&url=' + encodedUrl;
+      }
+
+      if (shareBtn) {
+        shareBtn.addEventListener('click', async function() {
+          var data = getSharePayload();
+          // Web Share API triggers native Android system share intent (Intent.ACTION_SEND)
+          if (navigator.share) {
+            try {
+              await navigator.share(data);
+            } catch (err) {
+              if (err.name !== 'AbortError') {
+                copyToClipboard(data.text + ' ' + data.url);
+              }
+            }
+          } else {
+            copyToClipboard(data.text + ' ' + data.url);
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

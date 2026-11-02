@@ -1,0 +1,17 @@
+{
+  "latestVersion": "1.0.0",
+  "latestVersionCode": 1,
+  "minimumVersion": "1.0.0",
+  "minimumVersionCode": 1,
+  "downloadUrl": "https://YOUR_USERNAME.github.io/YOUR_REPOSITORY/downloads/skillgo-latest.apk",
+  "websiteUrl": "https://YOUR_USERNAME.github.io/YOUR_REPOSITORY/",
+  "releaseNotes": [
+    "Official launch with 8 foundational interactive courses.",
+    "Integrated Gemini-powered SkillGo Coach for personalized analogies and hints.",
+    "Interactive streak flame tracker with 7-day habits calendar.",
+    "Tactile 3D button physics and clean Inter typography."
+  ],
+  "releaseDate": "2026-10-02",
+  "apkSizeMb": 10.0,
+  "isEnabled": true
+}

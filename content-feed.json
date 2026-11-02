@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "lastUpdated": "2026-10-02",
+  "announcements": [
+    {
+      "id": "announcement_web_distro",
+      "title": "Direct Web Distribution Active 🌐",
+      "message": "SkillGo receives continuous curriculum updates and new features directly from our website without needing Google Play!",
+      "emoji": "🌐",
+      "date": "2026-10-02"
+    }
+  ],
+  "dailyChallenge": {
+    "id": "challenge_cpu_control",
+    "title": "Hardware Mystery 🧠",
+    "topic": "Computer Architecture",
+    "prompt": "Which component inside a CPU specifically coordinates the fetch, decode, and execute cycle rhythm?",
+    "bonusXp": 30,
+    "bonusGems": 10,
+    "options": ["Control Unit (CU)", "Power Supply Unit (PSU)", "Graphics VRAM", "CMOS Battery"],
+    "correctIndex": 0,
+    "explanation": "The Control Unit (CU) orchestrates the CPU pipeline by decoding instructions and directing the flow of control signals."
+  },
+  "suggestedCoachPrompts": [
+    "Explain like I'm 10 years old 🐣",
+    "Give me an analogy with cars or cooking 🍳",
+    "Why does this matter in everyday technology? 💡",
+    "Give me a clue for my current question 🔍"
+  ]
+}
