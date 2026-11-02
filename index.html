@@ -754,6 +754,25 @@
           var dlBtn = document.getElementById('downloadBtn');
           if (dlBtn) dlBtn.href = data.downloadUrl;
           generateDownloadQrCode(data.downloadUrl);
+        } else {
+          // Auto-detect whether skillgo-latest.apk was uploaded to downloads/ or repository root
+          fetch('downloads/skillgo-latest.apk', { method: 'HEAD' })
+            .then(function(res) {
+              if (!res.ok) {
+                // If not in downloads/, check if uploaded directly to repo root
+                fetch('skillgo-latest.apk', { method: 'HEAD' })
+                  .then(function(rootRes) {
+                    if (rootRes.ok) {
+                      var dlBtn = document.getElementById('downloadBtn');
+                      if (dlBtn) dlBtn.href = 'skillgo-latest.apk';
+                      var rootApkUrl = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/') + 'skillgo-latest.apk';
+                      generateDownloadQrCode(rootApkUrl);
+                    }
+                  })
+                  .catch(function() {});
+              }
+            })
+            .catch(function() {});
         }
         if (Array.isArray(data.releaseNotes) && data.releaseNotes.length > 0) {
           var list = document.getElementById('changelogList');
@@ -770,6 +789,23 @@
       .catch(function(err) {
         // Fallback to static values if fetched in restricted environment
         console.log('Using static manifest fallback:', err);
+        // Also check if root APK exists in fallback mode
+        fetch('downloads/skillgo-latest.apk', { method: 'HEAD' })
+          .then(function(res) {
+            if (!res.ok) {
+              fetch('skillgo-latest.apk', { method: 'HEAD' })
+                .then(function(rootRes) {
+                  if (rootRes.ok) {
+                    var dlBtn = document.getElementById('downloadBtn');
+                    if (dlBtn) dlBtn.href = 'skillgo-latest.apk';
+                    var rootApkUrl = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/') + 'skillgo-latest.apk';
+                    generateDownloadQrCode(rootApkUrl);
+                  }
+                })
+                .catch(function() {});
+            }
+          })
+          .catch(function() {});
       });
 
     // Social Media Share & Android System Share Intent Handler
